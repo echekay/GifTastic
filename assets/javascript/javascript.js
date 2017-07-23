@@ -52,7 +52,7 @@ $(document).ready(function() {
 
         $("#gif-output").empty();
         var gif = $(this).attr("data-name");
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=93521d7b9a6a4859a17de5d61eb5a7a3&limit=10";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=93521d7b9a6a4859a17de5d61eb5a7a3&limit=10";
 
         $.ajax({
             url: queryURL,
