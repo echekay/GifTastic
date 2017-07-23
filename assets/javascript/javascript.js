@@ -32,7 +32,7 @@ $(document).ready(function() {
 
         // Tried to reset the search box when the user presses submit.
         // $("#gif-buttons")[0].reset();
-
+        $("#gif-buttons").empty();
         for (var i = 0; i < gifArray.length; i++) {
 
             var a = $("<button>");
@@ -67,7 +67,7 @@ $(document).ready(function() {
                 var p = $("<p>").text("Rating: " + results[i].rating);
                 var gifImage = $("<img>");
                 gifImage.attr("src", results[i].images.original_still.url);
-                gifImage.attr("class", "still");
+                // gifImage.attr("class", "still");
                 gifDiv.append(p);
                 gifDiv.append(gifImage);
                 $("#gif-output").prepend(gifDiv);
