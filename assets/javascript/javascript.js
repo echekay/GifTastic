@@ -10,50 +10,86 @@
 // This will send an ajax request to the giphy servers to search and bring back an object based on that query.
 // And then it will populate that same div space that holds all the gifs.
 // -------------------------------------------------------------------------------------------------------------------------------
-// 
-
-// Initial array of gifs
-var gifArray = ["Steve Carrell", "Richard Ayoade", "Donald Glover"];
-
-// Function to render buttons
-function renderButtons() {
-
-	$("#gif-output").empty();
-
-	for (var i = 0; i < gifArray.length; i++) {
-
-		var a = $("<button>");
-
-		a.addClass("gif");
-
-		a.attr("data-name", gifArray[i]);
-
-		a.text(gifArray[i]);
-
-		$("#gif-output").append(a);
-	}
-}
-
-// ---------------------------------------------------
-// Function to grab input and send request to server
-$("#add-gif").on("click", function(event) {
-
-    event.preventDefault();
-
-    var gif = $("#gif-input").val().trim();
-    var queryURL = "http:??api.giphy.com/v1/gifs/search?q=";
-    var authKey = "93521d7b9a6a4859a17de5d61eb5a7a3";
 
 
 
-    // var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YOUR_API_KEY&limit=5");
-    // xhr.done(function(data) { console.log("success got data", data); });
+$(document).ready(function() {
 
-    $.ajax({
-      url: queryURL,
-      method: 'GET'
-    }).done(function(response) {
-      console.log(response);
+    // GLobal Variables
+    // ---------------------------------------
+    // Initial array of gifs
+
+    var gifArray = ["Steve Carrell", "Richard Ayoade", "Donald Glover"];
+   
+
+
+
+
+    // Functions to run during process
+    // ------------------------------------------------------
+    // Function to render buttons
+    function renderButtons() {
+
+        $("#gif-buttons").empty();
+
+        for (var i = 0; i < gifArray.length; i++) {
+
+            var a = $("<button>");
+
+            a.addClass("gif");
+
+            a.attr("data-name", gifArray[i]);
+
+            a.text(gifArray[i]);
+
+            $("#gif-buttons").append(a);
+        }
+    }
+
+    function displayGifs() {
+
+    		$("#gif-output").empty();
+    		var gif = $(this).attr("data-name");
+    		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=93521d7b9a6a4859a17de5d61eb5a7a3&limit=10";
+
+    		$.ajax({
+          		url: queryURL,
+          		method: 'GET'
+        	}).done(function(response) {
+        		console.log(queryURL);
+          		console.log(response);
+          		var results = response.data;
+          		for (var i = 0; i < results.length; i++) {
+
+	          		var gifDiv = $("<div>");
+	          		var p = $("<p>").text("Rating: " + results[i].rating);
+	          		var gifImage = $("<img>");
+	          		gifImage.attr("src", results[i].images.fixed_height.url);
+	          		gifDiv.append(p);
+	          		gifDiv.append(gifImage);
+	          		$("#gif-output").prepend(gifDiv);
+	          		}
+        	}); 
+   	
+    }
+
+    // ---------------------------------------------------
+    // Main function to grab input and send request to server
+    $("#add-gif").on("click", function(event) {
+
+        event.preventDefault();
+
+        var gif = $("#gif-input").val().trim();
+
+        gifArray.push(gif);
+
+
+        renderButtons();
+       	$("#gif-input").empty();     
     });
+
+    $(document).on("click", ".gif", displayGifs);
+
+    renderButtons();
 
 });

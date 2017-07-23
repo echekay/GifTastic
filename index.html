@@ -5,30 +5,28 @@
     <meta charset="UTF-8">
     <title>GifTastic!</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/javascript/javascript.js"></script>
-    
 </head>
 
 <body>
-
-<!-- This is where the buttons will populate so the user can click on. -->
-<div id="gif-buttons">
-	
-</div>
-
-<!-- This is the form element in which the user will type in an actor to create a button in which they can click and pull up gifs of said actor. -->
-<form id="gif-form">
-	<label for="actors-input">Add Your Favorite Comedic Actor</label>
-	<input type="text" id="gif-input"><br>
-	<input type="submit" id="add-gif" value="Add an Actor">
-</form>
-
-<!-- This is where the gifs will populate when clicked on the buttons. -->
-<div id="gif-output">
-	
-</div>
-
-
+    <div class="container">
+    	<h1>Gif Search</h1>
+        <!-- This is where the buttons will populate so the user can click on. -->
+        <div id="gif-buttons"></div>
+        <!-- This is the form element in which the user will type in an actor to create a button in which they can click and pull up gifs of said actor. -->
+        <form id="gif-form">
+            <label for="gif-input">Add Your Favorite Comedic Actor</label>
+            <input type="text" id="gif-input">
+            <br>
+            <!-- Button triggering gif to be added -->
+            <input type="submit" id="add-gif" value="Add an Actor">
+        </form>
+        <!-- This is where the gifs will populate when clicked on the buttons. -->
+        <div id="gif-output">
+        </div>
+    </div>
 </body>
 
 </html>
